@@ -1,33 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { data } from '../add-product/data.model';
-
+import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-bills',
   templateUrl: './bills.component.html',
   styleUrls: ['./bills.component.css']
 })
 export class BillsComponent implements OnInit {
-  dataForm:FormGroup;
   data:data[]=[];
   value:any;
   details:any[]=[];
-  forms:any[]=[1];
+  form: any;
+  tests:any;
   constructor(private _http:HttpClient,private _formBuilder:FormBuilder) { }
 
   ngOnInit() {
-    this.dataForm = this._formBuilder.group(
-      {
-        _id: [''],
-        productUnit: [''],
-        quantity: [''],
-        taxVat: [''],
-        // box: [''],
-        // packet: [''],
-        // code: ['']
-      }
-    )
+    this.form = this._formBuilder.group({
+      productInvoice: this._formBuilder.array([]),
+    });
+   
     this._http.get('http://localhost/api/product').subscribe(
       (res:any) => {
         if(res.success)
@@ -46,43 +38,60 @@ export class BillsComponent implements OnInit {
          }
       } 
     )
-    console.log('done')
+    console.log('done');
+    // dynamicForm(selectedTarget, plusSelector, minusSelector, options)
+
   }
   test(event:any)
   {
      this.value = event.target.value;
-    console.log('value',this.value)
+     console.log('value', event.target.value)
   }
-  add()
+ 
+ 
+ 
+  delete(i)
   {
-    this.dataForm.get('productUnit').setValue(''),
-    this.dataForm.get('quantity').setValue('')
-    this.dataForm.get('taxVat').setValue('')
-    this.dataForm.get('_id').setValue('')
-    this.forms.push(this.forms.length + 1)
-    this.details.push({
-      product:this.value,
-      productUnit:this.dataForm.get('productUnit').value,
-      quantity:this.dataForm.get('quantity').value,
-      taxVat:this.dataForm.get('taxVat').value,
-    })
-  }
-  addBills()
-  {
-    console.log('details',this.details)
-    this.details.push({
-      product:this.value,
-      productUnit:this.dataForm.get('productUnit').value,
-      quantity:this.dataForm.get('quantity').value,
-      taxVat:this.dataForm.get('taxVat').value,
-    })
-    console.log('details',this.details)
-    this._http.post('http://localhost/api/invoice/add', this.details).subscribe(
-      (response:any) => {
-        console.log('response',response)
-      }
-    )
+    console.log('this.form',this.form.value.productInvoice)
+    this.form.value.productInvoice = this.form.value.productInvoice.filter((item,index) => {
+    //  console.log('this.details', index, 'kkk', item.id)
+     if(i == index){
+      console.log('this.details: ', i, 'index: ', index)
+      const control = <FormArray>this.form.controls['productInvoice'];
+      control.removeAt(i);
+            //return this.form.value.productInvoice.splice(index, 1)
+     }
      
+     
+   })
+
+  
+   
 
   }
+  addCreds() {
+    const creds = this.form.controls.productInvoice as FormArray;
+    creds.push(this._formBuilder.group({
+      product: '',
+        productUnit: '',
+        quantity: '',
+        taxVat: '',
+    }));
+    // console.log('creds',creds);
+    
+  }
+ save()
+ {
+  console.log(' this.details', this.form.value);
+  this._http.post('http://localhost/api/invoice/add', this.form.value).subscribe(
+      (response:any) => {
+        if(response.success)
+        {
+          this.form.value.productInvoice= [];
+          console.log('response',response)
+        }
+      
+      }
+    )
+ }
 }

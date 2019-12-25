@@ -6,18 +6,25 @@ import { AppComponent } from './app.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BillsComponent } from './bills/bills.component';
+import { PrintComponent } from './print/print.component';
+import {NgxPrintModule} from 'ngx-print';
+import { PrintOneComponent } from './print-one/print-one.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddProductComponent,
-    BillsComponent
+    BillsComponent,
+    PrintComponent,
+    PrintOneComponent
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPrintModule
   ],
   providers: [],
   bootstrap: [AppComponent]

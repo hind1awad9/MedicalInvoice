@@ -1,0 +1,37 @@
+<div class="container" style="margin-top: 20px;">
+    <table class="table table-striped" *ngFor="let x of data;let z=index" id="print-section">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">code</th>
+            <th scope="col">name</th>
+            <th scope="col">unit</th>
+            <th scope="col">taxVat</th>
+            <th scope="col">total</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let y of x.Invoices;let i=index">
+            <th >{{i}}</th>
+            <td>{{y.product.code}}</td>
+            <td>{{y.product.name}}</td>
+            <td>{{y.quantity}}</td>
+            <td>{{y.taxVat}}</td>
+            <td>{{y.totalPrice}}</td>
+            <td></td>
+          </tr>
+          <tr>
+              <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+           <td>{{x.invoiceTotalPrice}}</td> 
+          </tr>
+          <button printSectionId="print-section" ngxPrint>print</button> 
+        </tbody>
+      
+      </table>
+    </div>

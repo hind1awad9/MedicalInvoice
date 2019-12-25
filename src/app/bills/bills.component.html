@@ -1,19 +1,62 @@
 
-<div class="container" style="margin-top: 30px;">
-<input value="1" #number type="number" style="display: none;">
-<form [formGroup]="dataForm" *ngFor="let i of forms">
+<form [formGroup]="form" style="margin-top: 30px;">
+  <!-- <input type="checkbox" formControlName="published"> Published -->
+  <div style="margin-left: 350px;">
 
-<div class="form-row">
+    <!-- <h2>Credentials</h2> -->
+    <button (click)="addCreds()" style="margin-bottom: 30px;">Add</button>
+
+    <div formArrayName="productInvoice" *ngFor="let creds of form.controls.productInvoice?.value; let i = index">
+      <!-- <ng-container [formGroupName]="i"> -->
+        <div id="{{i}}">
+        <div class="form-row" [formGroupName]="i" >
+          <div class="form-group col-md-2">
+            <label >name</label>
+            <select  class="form-control" formControlName="product" (change)="test($event)">
+              <option selected *ngFor="let x of data;" [value]="x._id">{{x.name}}</option>
+             
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputState">productUnit</label>
+            <input type="text" class="form-control" disabled  formControlName="productUnit" value="peice" placeholder="peice">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">quantity</label>
+            <input type="text" class="form-control"  formControlName="quantity" >
+          </div>
+          <div class="form-group col-md-2">
+              <label for="inputZip">taxVat</label>
+              <input type="text" class="form-control"  formControlName="taxVat" >
+            </div>
+            <div class="form-group col-md-2">
+             
+            <button type="submit" class="btn btn-primary"  style="margin-top: 29px;" (click)="delete(i)"   >X</button>
+          </div>
+
+      </div>
+    </div>
+      <!-- </ng-container> -->
+    </div>
+    <button (click)="save()">save</button>
+  </div>
+</form>
+
+<!-- <div class="container" style="margin-top: 30px;">
+<input value="1" #number type="number" style="display: none;">
+<form [formGroup]="dataForm" *ngFor="let i of forms;let inx=index" >
+
+<div class="form-row" id="{{inx}}">
     <div class="form-group col-md-2">
       <label >name</label>
-      <select id="inputState" class="form-control" formControlName="_id" (change)="test($event)">
-        <option selected *ngFor="let i of data" [value]="i._id">{{i.name}}</option>
+      <select  class="form-control" formControlName="_id" id="{{inx}}" (change)="test($event)">
+        <option selected *ngFor="let i of data;" [value]="i._id"  >{{i.name}}</option>
        
       </select>
     </div>
     <div class="form-group col-md-2">
       <label for="inputState">productUnit</label>
-      <input type="text" class="form-control" id="inputCity" formControlName="productUnit">
+      <input type="text" class="form-control" id="inputCity"  formControlName="productUnit">
     </div>
     <div class="form-group col-md-2">
       <label for="inputZip">quantity</label>
@@ -23,18 +66,14 @@
         <label for="inputZip">taxVat</label>
         <input type="text" class="form-control" id="inputCity" formControlName="taxVat" >
       </div>
-      <!-- <div class="form-group col-md-2">
-        <label for="inputZip">taxvat</label>
-        <input type="text" class="form-control" id="inputCity" formControlName="packet" >
-      </div> -->
-      <!-- <div class="form-group col-md-2">
-        <label for="inputZip">packet</label>
-        <input type="text" class="form-control" id="inputCity" formControlName="packet" >
-      </div> -->
-  </div>
+      <div class="form-group col-md-2">
+       
+      <button type="submit" class="btn btn-primary"  style="margin-top: 29px;" (click)="delete(inx)" id="{{i._id}}"  *ngIf="i > 1">X</button>
+    </div>
+</div>
 
  
 </form>
-<button type="submit" class="btn btn-primary" (click)="number.value = 2" (click)="add()">Add</button>
+<button type="submit" class="btn btn-primary" (click)="number.value = 2"  (click)="add()">Add</button>
 <button type="submit" class="btn btn-primary" (click)="addBills()">Submit</button>
-</div>
+</div> -->
