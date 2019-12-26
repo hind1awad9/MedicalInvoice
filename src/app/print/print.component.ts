@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { data } from '../add-product/data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-print',
   templateUrl: './print.component.html',
   styleUrls: ['./print.component.css']
 })
+
 export class PrintComponent implements OnInit {
+  public x = true;
 data:data[]=[]
-  constructor(private _http:HttpClient,private _formBuilder:FormBuilder) { }
+  constructor(private _http:HttpClient,private _router:Router) { }
 
   ngOnInit() {
     
@@ -30,31 +33,15 @@ data:data[]=[]
          }
       } 
     )
+  
+     
   }
-  // onPreview(){
-  //   let printContents = '';
-  //   const WindowObject = window.open('','PrintWindow','width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes'
-  //   );
-  //   printContents += `<table>
-  //                    <tr>
-  //                      <th>Date</th>
-  //                      <th>ApplicationStatus</th> 
-  //                      <th>SubmittedBy</th>
-  //                    </tr>`;
-  //   this.data.map((data:any) => {
-  //        printContents += `<tr>
-  //                      <td>${data.invoiceTotalPrice}</td>
-  //                      <td>${data.invoiceTotalPrice}</td> 
-  //                      <td>${data.invoiceTotalPrice}</td>
-  //                    </tr>`;
-  //   const htmlData = `<html><body>${printContents}</body></html>`;
-  
-  //   WindowObject.document.writeln(htmlData);
-  //   WindowObject.document.close();
-  //   WindowObject.focus();
-  //   setTimeout(() => {
-  //     WindowObject.close();
-  //   }, 0.5);
-  // })}
-  
+ 
+  onClick(billID: number)
+  {
+    this._router.navigate(['/print',billID]);
+    this.x == false;
+ 
+
+  }
 }

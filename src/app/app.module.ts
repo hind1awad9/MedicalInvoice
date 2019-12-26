@@ -9,13 +9,19 @@ import { BillsComponent } from './bills/bills.component';
 import { PrintComponent } from './print/print.component';
 import {NgxPrintModule} from 'ngx-print';
 import { PrintOneComponent } from './print-one/print-one.component';
+import { AllProductsComponent } from './all-products/all-products.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     AddProductComponent,
     BillsComponent,
     PrintComponent,
-    PrintOneComponent
+    PrintOneComponent,
+    AllProductsComponent,
+    UpdateProductComponent
+  
   
   ],
   imports: [

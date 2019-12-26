@@ -30,7 +30,7 @@
         <td></td>
        <td>{{x.invoiceTotalPrice}}</td> 
       </tr>
-      <button printSectionId="print-section" ngxPrint>print</button> 
+      <button (click)="onClick(x._id)"  class="btn btn-primary">print</button> 
     </tbody>
   
   </table>

@@ -1,0 +1,41 @@
+<div class="container" style="margin-top: 20px;">
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+        <button (click)="close()" style="width: 12%;border: none;background: transparent;"> <span class="close">&times;</span></button> 
+          <p style="text-align: center;">{{message}}</p>
+        </div>
+      
+      </div>
+    <table class="table table-striped"  id="print-section">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">code</th>
+            <th scope="col">name</th>
+            <th scope="col">unit</th>
+            <th scope="col">originalPrice</th>
+            <th scope="col">sellingPrice</th>
+          <th></th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let x of data;let i=index">
+            <th >{{i}}</th>
+            <td>{{x.code}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.inStock.peice}}</td>
+            <td>{{x.originalPrice}}</td>
+            <td>{{x.sellingPrice}}</td>
+            <td>
+                <button (click)=" onClick(x._id)"  class="btn btn-primary" style="margin-right: 20px;">update</button> 
+                <button (click)="remove(x._id)"  class="btn btn-primary">remove</button> 
+            </td>
+          </tr>
+          
+          
+        </tbody>
+      
+      </table>
+    </div>

@@ -1,0 +1,52 @@
+<div class="container" style="margin-top: 30px;width: 50%;">
+    <h1 style="text-align: center;">update form</h1>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+  
+    <!-- Modal content -->
+    <div class="modal-content">
+    <button (click)="close()" style="width: 12%;border: none;background: transparent;"> <span class="close">&times;</span></button> 
+      <p style="text-align: center;">{{message}}</p>
+    </div>
+  
+  </div>
+  <form [formGroup]="dataForm">
+      <div class="form-group">
+        <label > name</label>
+        <input type="text" class="form-control" formControlName="name" value="{{data?.name}}">
+      
+      </div>
+      <div class="form-group">
+          <label > originalPrice</label>
+          <input type="text"  class="form-control" formControlName="originalPrice" value="{{data?.originalPrice}}">
+        
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1"> sellingPrice</label>
+          <input type="text" class="form-control" formControlName="sellingPrice" value="{{data?.sellingPrice}}">
+         
+        </div>
+        <div class="form-group">
+          <label > code</label>
+          <input type="text" class="form-control" formControlName="code" value="{{data?.code}}">
+          
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label >peice</label>
+            <input type="text" class="form-control" id="inputCity" formControlName="peice" value="{{data?.inStock?.peice}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">box</label>
+            <input type="text" class="form-control" id="inputCity" formControlName="box" value="{{data?.inStock?.box}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputZip">packet</label>
+            <input type="text" class="form-control" id="inputCity" formControlName="packet" value="{{data?.inStock?.packet}}" >
+          </div>
+        </div>
+       
+      
+      <button type="submit" class="btn btn-primary" (click)="update(data?._id)">Submit</button>
+    </form>
+  </div>
